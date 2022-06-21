@@ -5,6 +5,7 @@ class Modem:
     def __init__(self, fs, bufsz, ans=False):
         self.bit_rate = 300
         self.bits = []
+        self.phi = 0
         self.fs = fs  # taxa de amostragem
         self.bufsz = bufsz  # quantidade de amostras que devem ser moduladas por vez
 
@@ -23,25 +24,22 @@ class Modem:
     # Modulação
 
     def put_bits(self, bits):
-        if len(bits) == 0:
-            bits.append(1)
-        self.bits.extend(bits)
-
+        #if len(bits) == 0:
+         #   bits.append(1)
+        #self.bits.extend(bits)
+        return 0
 
     def get_samples(self):
-        x = np.arange(0, len(self.bits)/300, 1/self.fs)
         y = []
-        t = 0.0
-        phi = 0
+        
+        if len(self.bits) == 0:
+            self.bits.append(1) 
 
-        for i in self.bits:
-            w = (self.rx_omega0 if i == 0 else self.rx_omega1)
-            phi -= w*t
-            for j in range(self.fs/self.bit_rate):
-                x.append(t)
-                y.append(np.sin(t+phi))
-                t += 1/self.fs
-        self.bits = []
+        w = (self.rx_omega0 if self.bits[0] == 0 else self.rx_omega1)
+        for j in range(int(self.fs/self.bit_rate)):
+            y.append(np.sin(self.phi))
+            self.phi += w/self.fs
+        self.bits = self.bits[1:]
         return np.array(y)
 
     # Demodulação
