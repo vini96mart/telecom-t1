@@ -46,14 +46,14 @@ class Modem:
 
     # Demodulação
 
-    #def put_samples(self, data):
-     #   for n in range (1, len(self.s)):
-      #      self.v0r[n] = self.s[n] - self.r**self.L * np.cos(self.rx_omega0*self.L*self.T)*self.s[n-self.L] + self.r*np.cos(self.rx_omega0*self.T)*self.v0r[n-1] - self.r*np.sin(self.rx_omega0*self.T) * self.v0i[n-1]
-       #     self.v0i[n] = -self.r**self.L * np.sin(self.rx_omega0*self.L*self.T)*self.s[n-self.L] + self.r*np.cos(self.rx_omega0*self.T)*self.v0i[n-1] - self.r*np.sin(self.rx_omega0*self.T) * self.v0r[n-1]
+    def put_samples(self, data):
+        for n in range (1, len(self.s)):
+            self.v0r[n] = self.s[n] - self.r**self.L * np.cos(self.rx_omega0*self.L*self.T)*self.s[n-self.L] + self.r*np.cos(self.rx_omega0*self.T)*self.v0r[n-1] - self.r*np.sin(self.rx_omega0*self.T) * self.v0i[n-1]
+            self.v0i[n] = -self.r**self.L * np.sin(self.rx_omega0*self.L*self.T)*self.s[n-self.L] + self.r*np.cos(self.rx_omega0*self.T)*self.v0i[n-1] - self.r*np.sin(self.rx_omega0*self.T) * self.v0r[n-1]
 
-        #    self.v1r[n] = self.s[n] - self.r**self.L * np.cos(self.rx_omega1*self.L*self.T)*self.s[n-self.L] + self.r*np.cos(self.rx_omega1*self.T)*self.v1r[n-1] - self.r*np.sin(self.rx_omega1*self.T) * self.v1i[n-1]
-         #   self.v1i[n] = -self.r**self.L * np.sin(self.rx_omega1*self.L*self.T)*self.s[n-self.L] + self.r*np.cos(self.rx_omega1*self.T)*self.v0i[n-1] - self.r*np.sin(self.rx_omega1*self.T) * self.v1r[n-1]
-        #rho = self.v1r**2+self.v1i**2+self.v0r**2+self.v0i**2
+            self.v1r[n] = self.s[n] - self.r**self.L * np.cos(self.rx_omega1*self.L*self.T)*self.s[n-self.L] + self.r*np.cos(self.rx_omega1*self.T)*self.v1r[n-1] - self.r*np.sin(self.rx_omega1*self.T) * self.v1i[n-1]
+            self.v1i[n] = -self.r**self.L * np.sin(self.rx_omega1*self.L*self.T)*self.s[n-self.L] + self.r*np.cos(self.rx_omega1*self.T)*self.v0i[n-1] - self.r*np.sin(self.rx_omega1*self.T) * self.v1r[n-1]
+        rho = self.v1r**2+self.v1i**2+self.v0r**2+self.v0i**2
         pass
 
     def get_bits(self):
