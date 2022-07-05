@@ -5,8 +5,6 @@ class Modem:
     def __init__(self, fs, bufsz, ans=False):
         self.bit_rate = 300
         self.bits =[]
-        #self.lastn = 0
-        self.lastnlist = []
         self.s = []
         self.phi = 0
         self.sbuffer=[]
@@ -40,7 +38,6 @@ class Modem:
 
     def get_samples(self):
         y = []
-        #t = 0.0
 
         if len(self.bits) == 0:
             self.bits.append(1)
