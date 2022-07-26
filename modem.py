@@ -83,11 +83,13 @@ class Modem:
 
         size = len(self.v0r)
 
-        v0i = self.v0i
-        v0r = self.v0r
-        v1i = self.v1i
-        v1r = self.v1r
+        self.v0i = np.append(self.v0i,np.zeros(len(self.s)))
+        self.v0r = np.append(self.v0r,np.zeros(len(self.s)))
+        self.v1i = np.append(self.v1i,np.zeros(len(self.s)))
+        self.v1r = np.append(self.v1r,np.zeros(len(self.s)))
 
+        v0r, v0i, v1r, v1i = self.v0r, self.v0i, self.v1r, self.v1i
+        
         for n in range(size, len(s)):
             v0r[n] = s[n] - r**L*c0LT*s[n-L] + r*c0T*v0r[n-1] - r*s0T*v0i[n-1]
             v0i[n] = -rL*s0LT*s[n-L] + r*c0T*v0i[n-1] + r*s0T*v0r[n-1]
