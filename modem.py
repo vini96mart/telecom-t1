@@ -89,7 +89,7 @@ class Modem:
         self.v1r = np.append(self.v1r,np.zeros(len(self.s)))
 
         v0r, v0i, v1r, v1i = self.v0r, self.v0i, self.v1r, self.v1i
-        
+
         for n in range(size, len(s)):
             v0r[n] = s[n] - r**L*c0LT*s[n-L] + r*c0T*v0r[n-1] - r*s0T*v0i[n-1]
             v0i[n] = -rL*s0LT*s[n-L] + r*c0T*v0i[n-1] + r*s0T*v0r[n-1]
@@ -106,10 +106,11 @@ class Modem:
         v1 = v1i**2 + v1r**2
         rho = v0 + v1
 
-        c = abs(rho)
+        c = abs(v1r**2+v1i**2-v0r**2-v0i**2)
         v = self.v.copy()
         y = np.zeros(len(c))
- 
+
+        # rr = 0.9999
         for n in range(len(c)):
             v[2] = (1-rr)*c[n] + 2*rr*np.cos(2*np.pi*300/fs)*v[1] - rr**2*v[0]
             y[n] = v[2] - v[0]
