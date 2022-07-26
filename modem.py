@@ -89,11 +89,11 @@ class Modem:
         v1r = self.v1r
 
         for n in range(size, len(s)):
-            v0r[n] = s[n] - r**L * np.cos(omega0*L*T)*s[n-L] + r*np.cos(omega0*T)*v0r[n-1] - r*np.sin(omega0*T)*v0i[n-1]
-            v0i[n] = -rL * s0LT * s[n-L] + r*c0T*v0i[n-1] + r* s0T * v0r[n-1]
+            v0r[n] = s[n] - r**L*c0LT*s[n-L] + r*c0T*v0r[n-1] - r*s0T*v0i[n-1]
+            v0i[n] = -rL*s0LT*s[n-L] + r*c0T*v0i[n-1] + r*s0T*v0r[n-1]
                 
-            v1r[n] = s[n] - rL * c1LT * s[n-L] + r * c1T*v1r[n-1] - r * s1T * v1i[n-1]
-            v1i[n] = -rL * s1LT * s[n-L] + r * c1T * v1i[n-1] + r * s1T * v1r[n-1]
+            v1r[n] = s[n] - rL*c1LT*s[n-L] + r*c1T*v1r[n-1] - r*s1T*v1i[n-1]
+            v1i[n] = -rL*s1LT*s[n-L] + r*c1T*v1i[n-1] + r*s1T*v1r[n-1]
         
         self.v0i = v0i
         self.v0r = v0r
